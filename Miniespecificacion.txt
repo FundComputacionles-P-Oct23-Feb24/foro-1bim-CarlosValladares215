@@ -1,0 +1,67 @@
+1.  Inicio
+2.  numeroCompra, i[0-n]
+3.  numeroVenta, i[0-n]
+4.  cantidadValor, i[0-n]
+5.  cantidadVenta, i[0-n] <-- 0
+6.  valorProducto, d[0-n] <-- 0
+7.  valorVenta, d[0-n] <-- 0
+8.  cantidadRopaC, d[0-n] <-- 0
+9.  cantidadRopaV, d[0-n] <-- 0
+10. total, d[0-n]
+11. tipoRopaComprada, x(500)[{A-Z},{a-z},{0-9}]
+12. tipoRopaVendida, x(500)[{A-Z},{a-z},{0-9}] 
+13. ropaComprada, x(1000)[{A-Z},{a-z},{0-9}] <-- ""
+14. ropaVendida, x(1000)[{A-Z},{a-z},{0-9}] <-- ""
+15. bandera, l <-- falso
+16. << "¿ Cuanta ropa se ha comprado en el mes?"
+17. >> nuemeroCompra
+18. << "¿ Cuanta ropa se ha vendido en el mes?"
+19. >> numeroVenta
+20. Mientras (numeroCompra >= 1 or numeroVenta >=1) entonces
+21.	<< "¿Que tipo de ropa ha comprado?"
+22.	>> tipoRopa
+23.	<< "Digite el valor de la ropa comprada"
+24.	>> valorProducto
+25.	<< ¿ Cuantas ropas del valor de " + valorProducto + "$ ha comprado?"
+26.	>> cantidadValor
+27.	Si [(numeroCompra >= cantidadValor) AND (cantidadVenta > 0)] entonces
+28.		cantidadRopaC = (cantidadValor * valorProducto) + cantidadRopaC
+29.		numeroCompra = numeroCompra - cantidadValor
+30.             ropaComprada = ropaComprada + cantidadValor + tipoRopaComprada + " de " + valorProducto + " $ \n"
+31.		bandera <-- verdadero
+32.	Caso contrario
+33.		<< "La cantidad de ropas compradas de" + valorProducto + "$ debe ser menor o igual al del valor comprado"
+34.		numeroCompra = numeroCompra - numeroCompra
+35.		numeroVenta = numeroVenta - numeroVenta
+36.	Fin Si	
+37.	Si (numeroVenta >= 1) entonces
+38.		<< "¿Que tipo de ropa ha vendido?"
+39.		>> tipoRopaVendida
+40.		<< "Digite el valor de la ropa vendida"
+41.		>> valorVenta
+42.		<< "¿ Cuantas ropas del valor de " + valorVenta + "$ ha vendido?"
+43.		>> cantidadVenta
+44.		Si [(numeroVenta >= cantidadVenta) AND (cantidadVenta > 0 )] entonces
+45.                     cantidadRopaV = (cantidadVenta * valorVenta) + cantidadRopaV
+46.			numeroVenta = numeroVenta - cantidadVenta
+47.   			ropaVendida =  ropaVendida + cantidadVenta + tipoRopaVendida + " de " + valorVenta + " $ \n"
+48.			bandera <-- verdadero
+49.		Caso contrario
+50.			<< "La cantidad de ropas vendidas de" + valorVenta + "$ debe ser menor o igual al del valor vendido"
+51.			numeroCompra = numeroCompra - numeroCompra
+52.			numeroVenta = numeroVenta - numeroVenta
+53.		Fin Si
+54.	Fin Si
+55. Fin_Mientras
+56. Mientras (bandera) entonces
+57.	total = cantidadRopaV - cantidadRopaC
+58.   	<< "Usted ha comprado las siguientes prendas \n" + ropaComprada
+59.  	<< "Usted ha vendido las siguentes prendas \n" + ropaVendida
+60.   	Si total > 0 entonces
+61.		<< "Su negocio es rentable, en un mes ha ganado una cantidad de: " + total + " $\n"
+62. 	Caso contrario
+63.		<< "Su negocio no es rentable, en un mes ha generado perdidas de: " + total + "$\n"
+64.	Fin Si
+65. Fin Mientras
+66. Fin		
+		
